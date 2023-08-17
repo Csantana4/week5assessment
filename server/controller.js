@@ -15,11 +15,11 @@ module.exports = {
                 name varchar
             );
 
-            CREATE TABLES countries (
-                id SERIAL PRIMARY KEY,
+            CREATE TABLES cities (
+                city_id SERIAL PRIMARY KEY,
                 name VARCHAR
                 rating INT
-                country_id INT REFERENCES countries(id)
+                Country INT REFERENCES countries(id)
 
             )
 
@@ -238,10 +238,10 @@ module.exports = {
             })
     },
     createCity: (req, res)=>{
-        const {name, rating, countryId} = req.body
+        const {name, rating, Country} = req.body
         sequelize.query(`
-            INSERT INTO cities(name, rating, countryId)
-            VALUES('${name}', ${rating}, ${countryId})
+            INSERT INTO City Name(name, rating, Country)
+            VALUES('${name}', ${rating}, ${Country})
         `)
         .then((dbRes) =>{
             res.status(200).send(dbRes[0])
@@ -252,7 +252,7 @@ module.exports = {
     },
     getCities: (req, res) =>{
         sequelize.query(`
-            select id, name FROM cities;
+            SELECT id, name FROM City Name;
         `)
         .then((dbRes) =>{
             res.status(200).send(dbRes[0])
@@ -265,7 +265,7 @@ module.exports = {
     deleteCity: (req, res) =>{
         const {id} = req.params   
         sequelize.query(`
-        DELETE FROM cities
+        DELETE FROM City Name
         WHERE id = ${id}
         `)
         .then((dbRes) =>{
